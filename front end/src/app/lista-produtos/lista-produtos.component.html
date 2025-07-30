@@ -1,0 +1,44 @@
+<div class="tela-lista">
+  <div class="container-lista">
+    <h1 class="titulo">Gestão de Produtos</h1>
+
+    <div class="botao-superior">
+      <button (click)="cadastrarProduto()" class="btn-azul">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon-left" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+        </svg>
+        <span>Cadastrar Produto</span>
+      </button>
+    </div>
+
+    <div class="tabela-container">
+      <table class="tabela-produtos">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let produto of produtos">
+            <td>{{ produto.id }}</td>
+            <td>{{ produto.nome }}</td>
+            <td>R$ {{ produto.preco | number:'1.2-2' }}</td>
+            <td>{{ produto.quantidadeEstoque }}</td>
+            <td>
+              <button (click)="consultarEstoque(produto.id!)" class="btn-verde">
+                Consultar
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="produtos.length === 0">
+            <td colspan="5" class="sem-produtos">Nenhum produto encontrado.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

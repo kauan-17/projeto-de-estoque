@@ -1,0 +1,116 @@
+/* Tela geral */
+.tela-lista {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #eff6ff, #e0e7ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-family: "Inter", sans-serif;
+}
+
+/* Container central */
+.container-lista {
+  width: 100%;
+  max-width: 900px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+/* Título */
+.titulo {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 24px;
+}
+
+/* Botão superior */
+.botao-superior {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.btn-azul {
+  display: inline-flex;
+  align-items: center;
+  background-color: #2563eb;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+
+.btn-azul:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.04);
+}
+
+.icon-left {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+}
+
+/* Tabela */
+.tabela-container {
+  overflow-x: auto;
+}
+
+.tabela-produtos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabela-produtos th,
+.tabela-produtos td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tabela-produtos th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.tabela-produtos tr:hover {
+  background-color: #f0f9ff;
+}
+
+/* Botão de ação */
+.btn-verde {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-verde:hover {
+  background-color: #059669;
+}
+
+/* Mensagem de vazio */
+.sem-produtos {
+  text-align: center;
+  font-style: italic;
+  color: #6b7280;
+  padding: 20px 0;
+}

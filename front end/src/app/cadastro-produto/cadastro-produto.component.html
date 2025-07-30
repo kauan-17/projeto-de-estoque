@@ -1,0 +1,70 @@
+<div class="tela-cadastro">
+  <div class="container-cadastro">
+    <h1 class="titulo">Cadastrar Novo Produto</h1>
+
+    <form [formGroup]="produtoForm" (ngSubmit)="salvarProduto()">
+      <!-- Campo Nome -->
+      <div class="campo">
+        <label for="nome" class="label">Nome do Produto:</label>
+        <input
+          type="text"
+          id="nome"
+          formControlName="nome"
+          placeholder="Ex: Teclado Mecânico RGB"
+          class="input-form"
+        />
+        <div *ngIf="produtoForm.get('nome')?.invalid && produtoForm.get('nome')?.touched" class="mensagem-erro">
+          Nome é obrigatório.
+        </div>
+      </div>
+
+      <!-- Campo Preço -->
+      <div class="campo">
+        <label for="preco" class="label">Preço:</label>
+        <input
+          type="number"
+          id="preco"
+          formControlName="preco"
+          placeholder="0.00"
+          step="0.01"
+          class="input-form"
+        />
+        <div *ngIf="produtoForm.get('preco')?.invalid && produtoForm.get('preco')?.touched" class="mensagem-erro">
+          Preço deve ser positivo.
+        </div>
+      </div>
+
+      <!-- Campo Quantidade -->
+      <div class="campo">
+        <label for="quantidadeEstoque" class="label">Quantidade em Estoque:</label>
+        <input
+          type="number"
+          id="quantidadeEstoque"
+          formControlName="quantidadeEstoque"
+          placeholder="0"
+          class="input-form"
+        />
+        <div *ngIf="produtoForm.get('quantidadeEstoque')?.invalid && produtoForm.get('quantidadeEstoque')?.touched" class="mensagem-erro">
+          Deve ser um número inteiro não negativo.
+        </div>
+      </div>
+
+      <!-- Botões -->
+      <div class="botoes">
+        <button type="submit" [disabled]="produtoForm.invalid" class="btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-left" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"/>
+          </svg>
+          Salvar
+        </button>
+
+        <button type="button" (click)="voltar()" class="btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-left" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H16a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+          </svg>
+          Voltar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

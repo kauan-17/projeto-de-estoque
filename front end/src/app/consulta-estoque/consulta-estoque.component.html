@@ -1,0 +1,54 @@
+<div class="tela-detalhes">
+  <div class="container-detalhes">
+    <h1 class="titulo">Detalhes do Estoque</h1>
+
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="spinner"></div>
+      <p class="loading-text">Carregando dados do estoque...</p>
+    </div>
+
+    <div *ngIf="!estoque && !isLoading" class="msg-nao-encontrado">
+      <p>Produto não encontrado ou ID inválido.</p>
+      <button (click)="voltar()" class="btn-voltar">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon-left" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H16a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+            clip-rule="evenodd" />
+        </svg>
+        Voltar para a Lista
+      </button>
+    </div>
+
+    <div *ngIf="estoque" class="info-container">
+      <div class="info-box azul">
+        <p class="info-label">Nome do Produto:</p>
+        <p class="info-valor">{{ estoque.nome }}</p>
+      </div>
+      <div class="info-box verde">
+        <p class="info-label">Preço:</p>
+        <p class="info-valor">R$ {{ estoque.preco | number:'1.2-2' }}</p>
+      </div>
+      <div class="info-box amarelo">
+        <p class="info-label">Quantidade em Estoque:</p>
+        <p class="info-valor">{{ estoque.quantidadeEstoque }}</p>
+      </div>
+      <div
+        class="info-box estoque-baixo"
+        [ngClass]="estoque.estoqueBaixo ? 'critico' : 'ok'">
+        <p class="info-label">Estoque Baixo:</p>
+        <p class="info-valor">{{ estoque.estoqueBaixo ? 'Sim' : 'Não' }}</p>
+      </div>
+
+      <div class="botao-centro">
+        <button (click)="voltar()" class="btn-roxo">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-left" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H16a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+              clip-rule="evenodd" />
+          </svg>
+          Voltar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
