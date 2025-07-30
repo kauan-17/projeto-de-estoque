@@ -1,0 +1,4 @@
+com\example\estoque\controller\ConsultaEstoqueController.class
+com\example\estoque\dto\ProdutoDTO.class
+com\example\estoque\service\ConsultaEstoqueService.class
+com\example\estoque\EstoqueApplication.class
