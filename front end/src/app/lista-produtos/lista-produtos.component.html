@@ -10,7 +10,6 @@
         <span>Cadastrar Produto</span>
       </button>
     </div>
-
     <div class="tabela-container">
       <table class="tabela-produtos">
         <thead>
@@ -30,7 +29,10 @@
             <td>{{ produto.quantidadeEstoque }}</td>
             <td>
               <button (click)="consultarEstoque(produto.id!)" class="btn-verde">
-                Consultar
+                 Consultar
+              </button>
+              <button (click)="retirarProduto(produto)" class="btn-vermelho">
+                Retirar
               </button>
             </td>
           </tr>

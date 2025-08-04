@@ -8,11 +8,10 @@ import { Router, RouterModule } from '@angular/router';
   selector: 'app-lista-produtos',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  // Usar OnPush com ChangeDetectionStrategy é comum e recomendado em aplicações sem Zone.js.
-  // Precisamos chamar detectChanges() manualmente após operações assíncronas.
+
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './lista-produtos.component.html', // Referencia o arquivo HTML externo
-  styleUrls: ['./lista-produtos.component.css'] // Referencia o arquivo CSS externo
+  templateUrl: './lista-produtos.component.html',
+  styleUrls: ['./lista-produtos.component.css'] 
 })
 export class ListaProdutosComponent implements OnInit {
   produtos: Produto[] = [];
@@ -20,7 +19,7 @@ export class ListaProdutosComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private router: Router,
-    private cdr: ChangeDetectorRef // Injeta ChangeDetectorRef para detecção manual de mudanças
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -47,4 +46,26 @@ export class ListaProdutosComponent implements OnInit {
   consultarEstoque(id: number): void {
     this.router.navigate(['/estoque', id]);
   }
+
+  retirarProduto(produto: Produto): void {
+  const quantidadeStr = prompt(`Digite a quantidade que deseja retirar de "${produto.nome}":`);
+  const quantidade = Number(quantidadeStr);
+
+  if (!quantidadeStr || isNaN(quantidade) || quantidade <= 0) {
+    alert('Quantidade inválida.');
+    return;
+  }
+
+  this.productService.retirarProduto(produto.id!, quantidade).subscribe({
+    next: (res) => {
+      alert(res);
+      this.carregarProdutos(); // atualiza a lista após retirada
+    },
+    error: (err) => {
+      console.error('Erro ao retirar produto:', err);
+      alert(err.error || 'Erro ao retirar produto.');
+    }
+  });
+}
+
 }

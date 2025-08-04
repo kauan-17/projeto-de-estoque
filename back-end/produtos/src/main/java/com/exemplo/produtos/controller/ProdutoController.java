@@ -44,11 +44,29 @@ public class ProdutoController {
         }
     }
 
+    @PutMapping("/{id}/retirar")
+    public ResponseEntity<?> retirar(@PathVariable Long id, @RequestParam int quantidade) {
+        try {
+            Produto produtoAtualizado = service.retirar(id, quantidade);
+            if (produtoAtualizado == null) {
+                return ResponseEntity.ok("Produto retirado completamente e removido do sistema.");
+            } else {
+            return ResponseEntity.ok(produtoAtualizado);
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
+    
 }
 
 

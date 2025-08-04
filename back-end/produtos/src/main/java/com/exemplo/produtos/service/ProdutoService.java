@@ -56,7 +56,30 @@ public class ProdutoService {
             .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
 
+    public Produto retirar(Long id, int quantidade) {
+    return repository.findById(id)
+        .map(produto -> {
+            int estoqueAtual = produto.getQuantidadeEstoque();
+            if (quantidade > estoqueAtual) {
+                throw new IllegalArgumentException("Quantidade solicitada excede o estoque disponível.");
+            }
+
+            int novoEstoque = estoqueAtual - quantidade;
+
+            if (novoEstoque == 0) {
+                repository.deleteById(id);
+                return null; // produto excluído
+            } else {
+                produto.setQuantidadeEstoque(novoEstoque);
+                return repository.save(produto);
+            }
+        })
+        .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+}
+
+
     public void deletar(Long id) {
         repository.deleteById(id);
     }
+
 }
