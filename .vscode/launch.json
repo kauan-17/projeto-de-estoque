@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-EstoqueApplication<estoque>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.estoque.EstoqueApplication",
+            "projectName": "estoque",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProdutosApplication<produtos>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.exemplo.produtos.ProdutosApplication",
+            "projectName": "produtos",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

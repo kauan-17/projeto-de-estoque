@@ -1,39 +1,78 @@
+version: '3.8'
+
 services:
-  db:
-    image: postgres
-    container_name: db
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
     environment:
+      POSTGRES_DB: produto_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
-      POSTGRES_DB: produto_db
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - micro_net
 
-  produto-service:
+  produtos:
     build:
       context: ./back-end/produtos
-    container_name: produto-service
+      dockerfile: Dockerfile
+    container_name: produtos_api
+    ports:
+      - "8081:8081"
     depends_on:
-      - db
+      - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/produto_db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/produto_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 123
-    ports:
-      - "8081:8080"   # host:container
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: true
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      SERVER_PORT: 8081
+    networks:
+      - micro_net
 
-  estoque-service:
+  estoque:
     build:
       context: ./back-end/estoque
-    container_name: estoque-service
-    depends_on:
-      - produto-service
-    environment:
-      SERVICOA_URL: http://produto-service:8081/api/produtos
+      dockerfile: Dockerfile
+    container_name: estoque_api
     ports:
-      - "8082:8080"  # host:container
+      - "8082:8082"
+    depends_on:
+      - postgres
+      - produtos
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/produto_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: true
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      SERVER_PORT: 8082
+      SERVICO_A_URL: http://produtos:8081/api/produtos
+    networks:
+      - micro_net
+
+  front-end:
+    build:
+      context: ./front end
+      dockerfile: Dockerfile
+    container_name: front_angular
+    ports:
+      - "4200:80"
+    depends_on:
+      - produtos
+      - estoque
+    networks:
+      - micro_net
 
 volumes:
   postgres_data:
+
+networks:
+  micro_net:
+    driver: bridge
