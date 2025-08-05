@@ -28,12 +28,9 @@
             <td>R$ {{ produto.preco | number:'1.2-2' }}</td>
             <td>{{ produto.quantidadeEstoque }}</td>
             <td>
-              <button (click)="consultarEstoque(produto.id!)" class="btn-verde">
-                 Consultar
-              </button>
-              <button (click)="retirarProduto(produto)" class="btn-vermelho">
-                Retirar
-              </button>
+             <button (click)="consultarEstoque(produto.id!)" class="btn-verde">Consultar</button>
+             <button (click)="retirar(produto.id!)" class="btn-vermelho">Retirar</button>
+
             </td>
           </tr>
           <tr *ngIf="produtos.length === 0">

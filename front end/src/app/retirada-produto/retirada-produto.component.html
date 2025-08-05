@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>Retirar Produto</h2>
+
+  <div *ngIf="produto">
+    <p><strong>Nome:</strong> {{ produto.nome }}</p>
+    <p><strong>Estoque atual:</strong> {{ produto.quantidadeEstoque }}</p>
+
+    <label for="quantidade">Quantidade a retirar:</label>
+    <input type="number" id="quantidade" [(ngModel)]="quantidadeRetirada" min="1" />
+
+    <button (click)="retirar()">Confirmar Retirada</button>
+  </div>
+
+  <p class="mensagem" *ngIf="mensagem">{{ mensagem }}</p>
+  <p class="erro" *ngIf="erro">{{ erro }}</p>
+</div>

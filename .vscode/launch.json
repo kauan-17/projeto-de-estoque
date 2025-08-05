@@ -2,6 +2,19 @@
     "configurations": [
         {
             "type": "java",
+            "name": "EstoqueRetiradaApplication",
+            "request": "launch",
+            "mainClass": "main.java.com.example.retirar.EstoqueRetiradaApplication",
+            "projectName": "estoque-retirada"
+        },
+        {
+            "type": "java",
+            "name": "EstoqueRetiradaApplication",
+            "request": "launch",
+            "mainClass": "com.example.retirar.EstoqueRetiradaApplication"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-EstoqueApplication<estoque>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
@@ -19,6 +32,17 @@
             "projectName": "produtos",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EstoqueRetiradaApplication<estoque-retirada>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.retirar.EstoqueRetiradaApplication",
+            "projectName": "estoque-retirada",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=52781 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=estoque-retirada"
         }
     ]
 }

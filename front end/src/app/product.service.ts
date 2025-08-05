@@ -28,11 +28,8 @@ export class ProductService {
   consultarEstoque(id: number): Observable<Estoque> {
     return this.http.get<Estoque>(`${this.estoqueApiUrl}/${id}`);
   }
-
-  retirarProduto(id: number, quantidade: number): Observable<any> {
-  return this.http.put(`${this.produtosApiUrl}/${id}/retirar`, null, {
-    params: { quantidade: quantidade.toString() },
-    responseType: 'text' // ou 'json', dependendo da resposta do backend
-  });
+  buscarProdutoPorId(id: number): Observable<Produto> {
+  return this.http.get<Produto>(`${this.produtosApiUrl}/${id}`);
 }
+
 }
